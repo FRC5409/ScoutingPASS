@@ -1,7 +1,7 @@
 var config_data = `
 {
   "title": "Scouting PASS 2023",
-  "page_title": "Charged Up",
+  "page_title": "Charged Up Test 0.001",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter Initials",
@@ -61,6 +61,7 @@ var config_data = `
       "filename": "2023/field_image.png",
       "clickRestriction": "one",
       "shape": "circle 5 black red true"
+	  "required":"false"
     }
   ],
   "auton": [
