@@ -184,7 +184,7 @@ var config_data = `
       },
       "defaultValue": "x"
     },
-    { "name": "Links Scored",
+    { "name": "Links Contributed To",
       "code": "ls",
       "type": "counter"
     },
@@ -200,10 +200,6 @@ var config_data = `
       },
       "defaultValue": "x"
     },
-    { "name": "Swerve drive?",
-      "code": "sd",
-      "type": "bool"
-    },
     { "name": "Speed Rating",
       "code": "sr",
       "type": "radio",
@@ -216,21 +212,23 @@ var config_data = `
       },
       "defaultValue":"3"
     },
+    { "name": "Preferred Pickup Strat",
+    "code": "dr",
+    "type": "radio",
+    "choices": {
+      "sls": "Single Loading Station<br>",
+      "dls": "Double Loading Station<br>",
+      "gnd": "Ground Pickup<br>",
+      "x": "Did not observe"
+    },
+    "defaultValue": "x"
+    },
     { "name": "Died/Immobilized",
       "code": "die",
       "type": "bool"
     },
     { "name": "Tippy<br>(almost tipped over)",
       "code": "tip",
-      "type": "bool"
-    },
-    { "name": "Dropped Cones (>2)",
-      "code": "dc",
-      "type": "bool"
-    },
-    { "name": "Make good<br>alliance partner?",
-      "tooltip": "Would you want this robot on your alliance in eliminations?",
-      "code": "all",
       "type": "bool"
     },
     { "name": "Comments",
