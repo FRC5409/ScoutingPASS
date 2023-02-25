@@ -1,7 +1,7 @@
 var config_data = `
 {
-  "title": "Scouting PASS 2023",
-  "page_title": "Charges Up Scouting - Test 0.003",
+  "title": "Chargers Up Scouting - 2023",
+  "page_title": "Chargers Up Scouting - Test 0.003",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter First Name",
