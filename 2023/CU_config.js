@@ -1,7 +1,7 @@
 var config_data = `
 {
   "title": "Scouting PASS 2023",
-  "page_title": "Charges Up Scourting - Test 0.002",
+  "page_title": "Charges Up Scouting - Test 0.003",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter First Name",
@@ -101,10 +101,6 @@ var config_data = `
     }
   ],
   "teleop": [
-    { "name": "Cycle Timer",
-      "code": "tct",
-      "type": "cycle"
-    },
     { "name": "Grid Scoring",
       "code": "tsg",
       "type": "clickable_image",
@@ -114,13 +110,17 @@ var config_data = `
       "toggleClick": "true",
       "showFlip": "false",
       "showUndo": "false",
-      "shape": "circle 12 black red true",
-      "cycleTimer": "tct"
+      "shape": "circle 12 black red true"
+    },
+    { "name": "Dropped Gamepieces",
+      "code": "tdg",
+      "type": "counter",
+      "defaultValue": 0
     },
     { "name": "Feeder Count<br>(Fed another bot)",
       "code": "tfc",
       "type": "counter",
-      "cycleTimer": "tct"
+      "defaultValue": 0
     },
     { "name": "Was Fed<br>Game Pieces",
       "code": "wf",
