@@ -1,14 +1,14 @@
 var config_data = `
 {
   "title": "Scouting PASS 2023",
-  "page_title": "Charged Up Test 0.001",
+  "page_title": "Charges Up Scourting - Test 0.002",
   "checkboxAs": "10",
   "prematch": [
-    { "name": "Scouter Initials",
+    { "name": "Scouter First Name",
       "code": "s",
       "type": "scouter",
-      "size": 5,
-      "maxSize": 5,
+      "size": 30,
+      "maxSize": 30,
       "required": "true"
     },
     { "name": "Event",
