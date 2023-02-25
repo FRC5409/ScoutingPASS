@@ -60,7 +60,7 @@ var config_data = `
       "type": "clickable_image",
       "filename": "2023/field_image.png",
       "clickRestriction": "one",
-      "shape": "circle 5 black red true"
+      "shape": "circle 5 black red true",
 	  "required":"false"
     }
   ],
