@@ -213,7 +213,7 @@ var config_data = `
       "defaultValue":"3"
     },
     { "name": "Preferred Pickup Strat",
-    "code": "dr",
+    "code": "pps",
     "type": "radio",
     "choices": {
       "sls": "Single Loading Station<br>",
