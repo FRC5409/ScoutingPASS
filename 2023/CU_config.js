@@ -61,7 +61,7 @@ var config_data = `
       "filename": "2023/field_image.png",
       "clickRestriction": "one",
       "shape": "circle 5 black red true",
-	  "required":"false"
+	    "required":"false"
     }
   ],
   "auton": [
@@ -159,10 +159,10 @@ var config_data = `
       "code": "fs",
       "type":"radio",
       "choices": {
-        "p": "Parked<br>",
-        "d": "Docked (Not Engaged)<br>",
-        "e": "Engaged<br>",
-        "a": "Attempted but failed<br>",
+        "2": "Parked<br>",
+        "6": "Docked (Not Engaged)<br>",
+        "10": "Engaged<br>",
+        "0": "Attempted but failed<br>",
         "x": "Not attempted"
       },
       "defaultValue": "x"
@@ -177,9 +177,9 @@ var config_data = `
       "code": "ds",
       "type": "radio",
       "choices": {
-        "n": "Not Effective<br>",
-        "a": "Average<br>",
-        "v": "Very Effective<br>",
+        "0": "Not Effective<br>",
+        "1": "Average<br>",
+        "2": "Very Effective<br>",
         "x": "Not Observed"
       },
       "defaultValue": "x"
@@ -192,10 +192,10 @@ var config_data = `
       "code": "dr",
       "type": "radio",
       "choices": {
-        "b": "Below Average<br>",
-        "a": "Average<br>",
-        "g": "Good<br>",
-        "e": "Excellent<br>",
+        "1": "Below Average<br>",
+        "2": "Average<br>",
+        "3": "Good<br>",
+        "4": "Excellent<br>",
         "x": "Did not play defense"
       },
       "defaultValue": "x"
