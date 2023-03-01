@@ -1,7 +1,7 @@
 var config_data = `
 {
   "title": "Chargers Up Scouting - 2023",
-  "page_title": "Chargers Up Scouting - Test 0.003",
+  "page_title": "Chargers Up Scouting - Test 0.004",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter First Name",
@@ -92,9 +92,9 @@ var config_data = `
       "code": "ad",
       "type":"radio",
       "choices": {
-        "d": "Docked (not Engaged)<br>",
-        "e": "Engaged<br>",
-        "a": "Attempted but failed<br>",
+        "8": "Docked (not Engaged)<br>",
+        "12": "Engaged<br>",
+        "0": "Attempted but failed<br>",
         "x": "Not attempted"
       },
       "defaultValue": "x"
