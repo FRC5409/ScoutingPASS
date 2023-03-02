@@ -1,7 +1,7 @@
 var config_data = `
 {
   "title": "Chargers Up Scouting - 2023",
-  "page_title": "Chargers Up Scouting - Test 0.004",
+  "page_title": "Chargers Up Scouting - Newmarket",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter First Name",
@@ -14,7 +14,7 @@ var config_data = `
     { "name": "Event",
       "code": "e",
       "type": "event",
-      "defaultValue": "2022carv",
+      "defaultValue": "2023onnew",
       "required": "true",
       "disabled": "true"
     },
@@ -234,7 +234,7 @@ var config_data = `
     { "name": "Comments",
       "code": "co",
       "type": "text",
-      "size": 15,
+      "size": 30,
       "maxSize": 50
     }
   ]
