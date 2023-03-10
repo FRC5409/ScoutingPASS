@@ -1,7 +1,7 @@
 var config_data = `
 {
   "title": "Chargers Up Scouting - 2023",
-  "page_title": "Chargers Up Scouting - Newmarket",
+  "page_title": "Chargers Up Scouting - Waterloo",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter First Name",
@@ -14,7 +14,7 @@ var config_data = `
     { "name": "Event",
       "code": "e",
       "type": "event",
-      "defaultValue": "2023onnew",
+      "defaultValue": "2023onwat",
       "required": "true",
       "disabled": "true"
     },
@@ -101,6 +101,10 @@ var config_data = `
     }
   ],
   "teleop": [
+    { "name": "Cycle Timer",
+      "code": "tct",
+      "type": "cycle"
+    },
     { "name": "Grid Scoring",
       "code": "tsg",
       "type": "clickable_image",
@@ -110,7 +114,8 @@ var config_data = `
       "toggleClick": "true",
       "showFlip": "false",
       "showUndo": "false",
-      "shape": "circle 12 black red true"
+      "shape": "circle 12 black red true",
+      "cycleTimer": "tct"
     },
     { "name": "Dropped Gamepieces",
       "code": "tdg",
@@ -234,8 +239,8 @@ var config_data = `
     { "name": "Comments",
       "code": "co",
       "type": "text",
-      "size": 30,
-      "maxSize": 50
+      "size": 50,
+      "maxSize": 150
     }
   ]
 }`;
