@@ -1,7 +1,7 @@
 var config_data = `
 {
   "title": "Chargers Up Scouting - 2023",
-  "page_title": "Chargers Up Scouting - Waterloo",
+  "page_title": "Chargers Up Scouting - Provincials",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter First Name",
@@ -14,7 +14,7 @@ var config_data = `
     { "name": "Event",
       "code": "e",
       "type": "event",
-      "defaultValue": "2023onwat",
+      "defaultValue": "2023oncmp1",
       "required": "true",
       "disabled": "true"
     },
