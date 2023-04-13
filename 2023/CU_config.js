@@ -1,7 +1,7 @@
 var config_data = `
 {
   "title": "Chargers Up Scouting - 2023",
-  "page_title": "Chargers Up Scouting - Provincials",
+  "page_title": "Chargers Up Scouting - Champs - Needs Div Still",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter First Name",
