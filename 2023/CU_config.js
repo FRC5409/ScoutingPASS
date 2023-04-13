@@ -122,6 +122,11 @@ var config_data = `
       "type": "counter",
       "defaultValue": 0
     },
+    { "name": "SuperCharged Nodes",
+      "code": "spr",
+      "type": "counter",
+      "defaultValue": 0
+    },
     { "name": "Feeder Count<br>(Fed another bot)",
       "code": "tfc",
       "type": "counter",
