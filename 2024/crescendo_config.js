@@ -79,17 +79,20 @@ var config_data = `
     }
   ],
   "teleop": [
+    { "name": "Cycle Timer",
+      "code": "tct",
+      "gsCol": "cycleTimes",
+      "type": "cycle"
+    },
     { "name": "Amp Scores",
       "code": "tas",
       "type": "counter"
+      "cycleTimer": "tct"
     },
     { "name": "Speaker Scores",
       "code": "tss",
       "type": "counter"
-    },
-    { "name": "Times Amplified",
-      "code": "tta",
-      "type": "counter"
+      "cycleTimer": "tct"
     },
     { "name": "Pickup From",
       "code": "tpu",
@@ -112,10 +115,9 @@ var config_data = `
       "code": "fs",
       "type":"radio",
       "choices": {
-        "p": "Parked<br>",
         "o": "Onstage<br>",
-        "s": "Onstage (Spotlit)<br>",
         "h": "Harmony<br>",
+        "p": "Parked<br>",
         "a": "Attempted but failed<br>",
         "x": "Not attempted"
       },
@@ -125,15 +127,27 @@ var config_data = `
       "code": "nit",
       "type": "bool"
     }
+    { "name": "Human Player Scored Spotlight",
+      "code": "hss",
+      "type": "radio"
+      "choices": {
+        "3": "3",
+        "2": "2",
+        "1": "1",
+        "a": "Attempted but failed<br>",
+        "x": "Other alliance has human player"
+      },
+      "defaultValue": "x"
+    }
   ],
   "postmatch": [
     { "name": "Driver Skill",
       "code": "ds",
       "type": "radio",
       "choices": {
-        "n": "Not Effective<br>",
-        "a": "Average<br>",
-        "v": "Very Effective<br>",
+        "5": "Very Effective<br>",
+        "3": "Average<br>",
+        "1": "Not Effective<br>",
         "x": "Not Observed"
       },
       "defaultValue": "x"
@@ -142,10 +156,10 @@ var config_data = `
       "code": "dr",
       "type": "radio",
       "choices": {
-        "b": "Below Average<br>",
-        "a": "Average<br>",
-        "g": "Good<br>",
-        "e": "Excellent<br>",
+        "5": "Excellent<br>",
+        "4": "Good<br>",
+        "3": "Average<br>",
+        "1": "Below Average<br>",
         "x": "Did not play defense"
       },
       "defaultValue": "x"
@@ -154,11 +168,11 @@ var config_data = `
       "code": "sr",
       "type": "radio",
       "choices": {
-        "1": "1 (slow)<br>",
-        "2": "2<br>",
-        "3": "3<br>",
-        "4": "4<br>",
         "5": "5 (fast)"
+        "4": "4<br>",
+        "3": "3<br>",
+        "2": "2<br>",
+        "1": "1 (slow)<br>",        
       },
       "defaultValue":"3"
     },
