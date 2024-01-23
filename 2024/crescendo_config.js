@@ -124,7 +124,7 @@ var config_data = `
     { "name": "Note in Trap",
       "code": "nit",
       "type": "bool"
-    }
+    },
     { "name": "Human Player Scored Spotlight",
       "code": "hss",
       "type": "radio"
