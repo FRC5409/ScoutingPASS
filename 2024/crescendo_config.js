@@ -87,7 +87,6 @@ var config_data = `
     { "name": "Amp Scores",
       "code": "tas",
       "type": "counter"
-      "cycleTimer": "tct"
     },
     { "name": "Speaker Scores",
       "code": "tss",
