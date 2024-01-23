@@ -91,7 +91,6 @@ var config_data = `
     { "name": "Speaker Scores",
       "code": "tss",
       "type": "counter"
-      "cycleTimer": "tct"
     },
     { "name": "Pickup From",
       "code": "tpu",
