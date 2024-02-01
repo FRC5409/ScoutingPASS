@@ -60,7 +60,7 @@ var config_data = `
       "type": "clickable_image",
       "filename": "2024/field_image.png",
       "clickRestriction": "one",
-      "allowableResponses": "1 2 11 12 13 14 23 24 25 26 35 36 37 38 47 48 49 50 59 60 61 62 71 72",
+      "allowableResponses": "1 12 13 24 25 36 37 48 49 60 61 72",
       "shape": "circle 5 black red true"
     }
   ],
@@ -79,17 +79,16 @@ var config_data = `
     }
   ],
   "teleop": [
-    { "name": "Cycle Timer",
-      "code": "tct",
-      "gsCol": "cycleTimes",
-      "type": "cycle"
-    },
     { "name": "Amp Scores",
       "code": "tas",
       "type": "counter"
     },
     { "name": "Speaker Scores",
       "code": "tss",
+      "type": "counter"
+    },
+    { "name": "Times Amplified",
+      "code": "tta",
       "type": "counter"
     },
     { "name": "Pickup From",
@@ -113,9 +112,10 @@ var config_data = `
       "code": "fs",
       "type":"radio",
       "choices": {
-        "o": "Onstage<br>",
-        "h": "Harmony<br>",
         "p": "Parked<br>",
+        "o": "Onstage<br>",
+        "s": "Onstage (Spotlit)<br>",
+        "h": "Harmony<br>",
         "a": "Attempted but failed<br>",
         "x": "Not attempted"
       },
@@ -124,18 +124,6 @@ var config_data = `
     { "name": "Note in Trap",
       "code": "nit",
       "type": "bool"
-    },
-    { "name": "Human Player Scored Spotlight",
-      "code": "hss",
-      "type": "radio"
-      "choices": {
-        "3": "3",
-        "2": "2",
-        "1": "1",
-        "a": "Attempted but failed<br>",
-        "x": "Other alliance has human player"
-      },
-      "defaultValue": "x"
     }
   ],
   "postmatch": [
@@ -143,9 +131,9 @@ var config_data = `
       "code": "ds",
       "type": "radio",
       "choices": {
-        "5": "Very Effective<br>",
-        "3": "Average<br>",
-        "1": "Not Effective<br>",
+        "n": "Not Effective<br>",
+        "a": "Average<br>",
+        "v": "Very Effective<br>",
         "x": "Not Observed"
       },
       "defaultValue": "x"
@@ -154,10 +142,10 @@ var config_data = `
       "code": "dr",
       "type": "radio",
       "choices": {
-        "5": "Excellent<br>",
-        "4": "Good<br>",
-        "3": "Average<br>",
-        "1": "Below Average<br>",
+        "b": "Below Average<br>",
+        "a": "Average<br>",
+        "g": "Good<br>",
+        "e": "Excellent<br>",
         "x": "Did not play defense"
       },
       "defaultValue": "x"
@@ -166,11 +154,11 @@ var config_data = `
       "code": "sr",
       "type": "radio",
       "choices": {
-        "5": "5 (fast)"
-        "4": "4<br>",
-        "3": "3<br>",
+        "1": "1 (slow)<br>",
         "2": "2<br>",
-        "1": "1 (slow)<br>",        
+        "3": "3<br>",
+        "4": "4<br>",
+        "5": "5 (fast)"
       },
       "defaultValue":"3"
     },
