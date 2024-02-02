@@ -79,6 +79,11 @@ var config_data = `
     }
   ],
   "teleop": [
+    { "name": "Cycle Timer",
+      "code": "tct",
+      "gsCol": "cycleTimes",
+      "type": "cycle"
+    },
     { "name": "Amp Scores",
       "code": "tas",
       "type": "counter"
