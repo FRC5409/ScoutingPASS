@@ -91,14 +91,6 @@ var config_data = `
       "code": "tta",
       "type": "counter"
     },
-    { "name": "Fouls",
-      "code": "tas",
-      "type": "counter"
-    },
-    { "name": "Tech Fouls",
-      "code": "tas",
-      "type": "counter"
-    },
     { "name": "Pickup From",
       "code": "tpu",
       "type": "radio",
@@ -130,13 +122,9 @@ var config_data = `
       "defaultValue": "x"
     },
     { "name": "Note in Trap",
-      "code": "ass",
-      "type": "counter"
-    },
-    { "name": "Spotlit notes",
-      "code": "ass",
-      "type": "counter"
-    },
+      "code": "nit",
+      "type": "bool"
+    }
   ],
   "postmatch": [
     { "name": "Driver Skill",
