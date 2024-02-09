@@ -148,7 +148,7 @@ var config_data = `
     },
     { "name": "Human Player Spotlight",
       "code": "nps",
-      "type": "boolean"
+      "type": "bool"
     }
   ],
   "postmatch": [
