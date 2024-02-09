@@ -96,6 +96,14 @@ var config_data = `
       "code": "tta",
       "type": "counter"
     },
+    { "name": "Fouls",
+      "code": "tf",
+      "type": "counter"
+    },
+    { "name": "Tech Fouls",
+      "code": "ttf",
+      "type": "counter"
+    },
     { "name": "Pickup From",
       "code": "tpu",
       "type": "radio",
@@ -126,9 +134,21 @@ var config_data = `
       },
       "defaultValue": "x"
     },
-    { "name": "Note in Trap",
+    { "name": "Notes in Trap",
       "code": "nit",
-      "type": "bool"
+      "type": "counter"
+    },
+    { "name": "Spotlit Notes",
+      "code": "sn",
+      "type": "counter"
+    },
+    { "name": "Harmonized Robots",
+      "code": "nit",
+      "type": "counter"
+    },
+    { "name": "Human Player Spotlight",
+      "code": "nps",
+      "type": "boolean"
     }
   ],
   "postmatch": [
