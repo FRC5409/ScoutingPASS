@@ -142,13 +142,13 @@ var config_data = `
       "code": "sn",
       "type": "counter"
     },
-    { "name": "Human Player",
-      "code": "nps",
-      "type": "bool"
-    },
     { "name": "Harmonized Robots",
       "code": "nit",
       "type": "counter"
+    },
+    { "name": "Human Player Spotlight",
+      "code": "nps",
+      "type": "bool"
     }
   ],
   "postmatch": [
