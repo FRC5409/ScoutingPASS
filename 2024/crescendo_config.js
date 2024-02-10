@@ -127,10 +127,10 @@ var config_data = `
       "code": "fs",
       "type":"radio",
       "choices": {
-        "p": "Parked<br>",
-        "o": "Onstage<br>",
-        "s": "Onstage (Spotlit)<br>",
-        "h": "Harmony<br>",
+        "1": "Parked<br>",
+        "3": "Onstage<br>",
+        "4": "Onstage (Spotlit)<br>",
+        "2": "Harmony<br>",
         "a": "Attempted but failed<br>",
         "x": "Not attempted"
       },
@@ -158,9 +158,9 @@ var config_data = `
       "code": "ds",
       "type": "radio",
       "choices": {
-        "n": "Not Effective<br>",
-        "a": "Average<br>",
-        "v": "Very Effective<br>",
+        "1": "Not Effective<br>",
+        "2": "Average<br>",
+        "3": "Very Effective<br>",
         "x": "Not Observed"
       },
       "defaultValue": "x"
@@ -169,10 +169,10 @@ var config_data = `
       "code": "dr",
       "type": "radio",
       "choices": {
-        "b": "Below Average<br>",
-        "a": "Average<br>",
-        "g": "Good<br>",
-        "e": "Excellent<br>",
+        "1": "Below Average<br>",
+        "2": "Average<br>",
+        "3": "Good<br>",
+        "4": "Excellent<br>",
         "x": "Did not play defense"
       },
       "defaultValue": "x"
