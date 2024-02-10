@@ -86,11 +86,13 @@ var config_data = `
     },
     { "name": "Amp Scores",
       "code": "tas",
-      "type": "counter"
+      "type": "counter",
+      "cycleTimer": "tct"
     },
     { "name": "Speaker Scores",
       "code": "tss",
-      "type": "counter"
+      "type": "counter",
+      "cycleTimer": "tct"
     },
     { "name": "Times Amplified",
       "code": "tta",
