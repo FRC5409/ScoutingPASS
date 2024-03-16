@@ -1,8 +1,8 @@
 var config_data = `
 {
   "dataFormat": "tsv",
-  "title": "Scouting PASS 2024",
-  "page_title": "Crescendo",
+  "title": "Scouting PASS 2024 - Not",
+  "page_title": "Crescendo - North Bay",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter Initials",
@@ -15,7 +15,7 @@ var config_data = `
     { "name": "Event",
       "code": "e",
       "type": "event",
-      "defaultValue": "2023tnkn",
+      "defaultValue": "2024onnob",
       "required": "true"
     },
     { "name": "Match Level",
