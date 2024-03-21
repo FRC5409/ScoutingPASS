@@ -98,6 +98,10 @@ var config_data = `
       "code": "tta",
       "type": "counter"
     },
+    { "name": "Notes Dropped",
+      "code": "tnd",
+      "type": "counter"
+    },
     { "name": "Defense Notes Blocked",
       "code": "tdnb",
       "type": "counter"
