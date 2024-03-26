@@ -213,7 +213,7 @@ var config_data = `
     { "name": "Comments",
       "code": "co",
       "type": "text",
-      "size": 300,
+      "size": 30,
       "maxSize": 300
     }
   ]
