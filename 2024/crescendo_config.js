@@ -98,20 +98,16 @@ var config_data = `
       "code": "tta",
       "type": "counter"
     },
-    { "name": "Notes Dropped",
-      "code": "tnd",
+    { "name": "Shots Missed",
+      "code": "tsm",
       "type": "counter"
     },
-    { "name": "Defense Notes Blocked",
+    { "name": "Feeded Note",
+    "code": "tfn",
+    "type": "counter"
+    },
+    { "name": "Defense: Notes Blocked",
       "code": "tdnb",
-      "type": "counter"
-    },
-    { "name": "Fouls",
-      "code": "tf",
-      "type": "counter"
-    },
-    { "name": "Tech Fouls",
-      "code": "ttf",
       "type": "counter"
     },
     { "name": "Pickup From",
@@ -217,8 +213,8 @@ var config_data = `
     { "name": "Comments",
       "code": "co",
       "type": "text",
-      "size": 15,
-      "maxSize": 55
+      "size": 30,
+      "maxSize": 100
     }
   ]
 }`;
