@@ -2,7 +2,7 @@ var config_data = `
 {
   "dataFormat": "tsv",
   "title": "Scouting PASS 2024 - Not",
-  "page_title": "Crescendo - McMaster",
+  "page_title": "Crescendo - DCMP",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter Initials",
@@ -15,7 +15,7 @@ var config_data = `
     { "name": "Event",
       "code": "e",
       "type": "event",
-      "defaultValue": "2024onham",
+      "defaultValue": "2024oncmp2",
       "required": "true"
     },
     { "name": "Match Level",
