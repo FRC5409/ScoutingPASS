@@ -214,7 +214,8 @@ var config_data = `
       "code": "co",
       "type": "text",
       "size": 30,
-      "maxSize": 300
+      "maxSize": 300, 
+      "defaultValue": " "
     }
   ]
 }`;
