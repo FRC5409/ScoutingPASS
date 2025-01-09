@@ -1,8 +1,8 @@
 var config_data = `
 {
   "dataFormat": "tsv",
-  "title": "ReefScape - Newmarket",
-  "page_title": "REEFSCAPE",
+  "title": "Scouting PASS 2025",
+  "page_title": "REEFSCAPE - Newmarket",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter Initials",
@@ -224,8 +224,8 @@ var config_data = `
     { "name": "Comments",
       "code": "co",
       "type": "text",
-      "size": 15,
-      "maxSize": 55
+      "size": 50,
+      "maxSize": 300
     }
   ]
 }`;
