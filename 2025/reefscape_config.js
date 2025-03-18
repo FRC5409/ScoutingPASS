@@ -130,7 +130,7 @@ var config_data = `
       },
       "defaultValue": "x"
     },
-    { "name": "Scored in Opponent Processor",
+    { "name": "Removed Algae From Reef?",
       "code": "opp",
       "type": "bool"
     }
