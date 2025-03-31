@@ -111,12 +111,20 @@ var config_data = `
       "code": "tc4",
       "type": "counter"
     },
+    { "name": "Coral Missed",
+      "code": "cm",
+      "type": "counter"
+    },
     { "name": "Processor Score",
       "code": "tps",
       "type": "counter"
     },
     { "name": "Net Score",
       "code": "tns",
+      "type": "counter"
+    },
+    { "name": "Algae Missed",
+      "code": "am",
       "type": "counter"
     },
     { "name": "Pickup From",
@@ -136,9 +144,11 @@ var config_data = `
     }
   ],
   "endgame": [
-    { "name": "Barge Timer",
-      "code": "ebt",
-      "type": "timer"
+    { "name": "Second to Climb",
+      "code": "sc",
+      "type": "number",
+      "min": 0,
+      "defaultValue": 0
     },
     { "name": "Final Status",
       "code": "efs",
@@ -187,6 +197,12 @@ var config_data = `
         "x": "Did not play defense"
       },
       "defaultValue": "x"
+    },
+    { "name": "IF DEFENSE: Penalty Point of Match",
+      "code": "ppm",
+      "type": "number",
+      "min": 0,
+      "defaultValue": 0
     },
     { "name": "Speed Rating",
       "code": "sr",
