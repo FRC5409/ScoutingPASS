@@ -2,7 +2,7 @@ var config_data = `
 {
   "dataFormat": "tsv",
   "title": "Scouting PASS 2025",
-  "page_title": "REEFSCAPE - Newmarket",
+  "page_title": "REEFSCAPE - DCMP",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter Initials",
