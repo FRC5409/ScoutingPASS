@@ -12,10 +12,19 @@ var config_data = `
       "maxSize": 5,
       "required": "true"
     },
+    { "name": "Member Status",
+    "code": "ms",
+    "type": "level",
+    "choices": {
+      "old": "Returning<br>",
+      "new": "New<br>"
+      },
+    "required": "true"
+    },
     { "name": "Event",
       "code": "e",
       "type": "event",
-      "defaultValue": "2025oncmp2",
+      "defaultValue": "Stemly",
       "required": "true"
     },
     { "name": "Match Level",
