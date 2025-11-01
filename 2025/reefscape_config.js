@@ -13,7 +13,7 @@ var config_data = `
       "required": "true"
     },
     { "name": "Member Status",
-    "code": "l",
+    "code": "e",
     "type": "level",
     "choices": {
       "old": "Returning<br>",
