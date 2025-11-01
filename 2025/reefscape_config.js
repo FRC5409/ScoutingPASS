@@ -13,7 +13,7 @@ var config_data = `
       "required": "true"
     },
     { "name": "Member Status",
-    "code": "ms",
+    "code": "l",
     "type": "level",
     "choices": {
       "old": "Returning<br>",
@@ -76,7 +76,7 @@ var config_data = `
   "auton": [
     { "name": "Leave Starting Line",
       "code": "al",
-      "type": "bool"
+      "type": "bool"   
     },
     { "name": "Coral L1",
       "code": "ac1",
