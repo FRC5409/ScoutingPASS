@@ -2,7 +2,7 @@ var config_data = `
 {
   "dataFormat": "tsv",
   "title": "Scouting PASS 2025",
-  "page_title": "REEFSCAPE - DCMP",
+  "page_title": "REEFSCAPE - STEMLY",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter Initials",
@@ -24,7 +24,7 @@ var config_data = `
     { "name": "Event",
       "code": "e",
       "type": "event",
-      "defaultValue": "Stemly",
+      "defaultValue": "2025onham1",
       "required": "true"
     },
     { "name": "Match Level",
