@@ -13,6 +13,7 @@ var slide = 0;
 var enableGoogleSheets = false;
 var pitScouting = false;
 var checkboxAs = 'YN';
+var ColWidth = '200px';
 
 // Options
 var options = {
@@ -21,9 +22,8 @@ var options = {
   quietZoneColor: '#FFFFFF'
 };
 
-// Must be filled in: e=event, m=match#, l=level(q,qf,sf,f), t=team#, r=robot(r1,r2,b1..), s=scouter
-//var requiredFields = ["e", "m", "l", "t", "r", "s", "as"];
-var requiredFields = ["e", "m", "l", "r", "s", "as"];
+// Built from the JSON
+var requiredFields = []; //["e", "m", "l", "r", "s", "as"];
 
 function addTimer(table, idx, name, data) {
   var row = table.insertRow(idx);
@@ -149,66 +149,123 @@ function addTimer(table, idx, name, data) {
 }
 
 function addCounter(table, idx, name, data) {
-  var row = table.insertRow(idx);
-  var cell1 = row.insertCell(0);
-  cell1.classList.add("title");
+  const row = table.insertRow(idx);
+  const hasExtraInc = data.hasOwnProperty('altInc1') || data.hasOwnProperty('altInc2');
+  
+  // Error Handling
   if (!data.hasOwnProperty('code')) {
-    cell1.innerHTML = `Error: No code specified for ${name}`;
+    const errorCell = row.insertCell(0);
+    errorCell.classList.add("title");
+    errorCell.innerHTML = `Error: No code specified for ${name}`;
     return idx + 1;
   }
-  var cell2 = row.insertCell(1);
-  cell1.innerHTML = name + '&nbsp;';
+
+  // Create title cell
+  const titleCell = row.insertCell(0);
+  titleCell.classList.add("title");
   if (data.hasOwnProperty('tooltip')) {
-    cell1.setAttribute("title", data.tooltip);
+    titleCell.setAttribute("title", data.tooltip);
   }
-  cell2.classList.add("field");
 
-  var button1 = document.createElement("input");
-  button1.setAttribute("type", "button");
-  button1.setAttribute("id", "minus_" + data.code);
-  button1.setAttribute("onclick", "counter(this.parentElement, -1)");
-  button1.setAttribute("value", "-");
-  cell2.appendChild(button1);
+  let controlCell;
 
-  var inp = document.createElement("input");
-  inp.classList.add("counter");
-  inp.setAttribute("id", "input_" + data.code);
-  inp.setAttribute("type", "text");
-  if (enableGoogleSheets && data.hasOwnProperty('gsCol')) {
-    inp.setAttribute("name", data.gsCol);
+  if (hasExtraInc) {
+    // When extra increments exist, use a single cell with colspan
+    titleCell.setAttribute("colspan", 2);
+    titleCell.style.cssText = 'text-align: center; vertical-align: middle;';
+    
+    // Create wrapper div for flex layout
+    const wrapper = document.createElement("div");
+    wrapper.style.cssText = 'display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;';
+    
+    // Create label
+    const label = document.createElement("div");
+    label.textContent = name;
+    label.style.cssText = 'margin-bottom: 4px;';
+    wrapper.appendChild(label);
+    
+    titleCell.appendChild(wrapper);
+    controlCell = wrapper;
   } else {
-    inp.setAttribute("name", data.code);
+    // Standard two-cell layout
+    titleCell.style.width = ColWidth;
+    titleCell.innerHTML = `${name}&nbsp;`;
+    
+    controlCell = row.insertCell(1);
+    controlCell.style.width = ColWidth;
+    controlCell.classList.add("field");
+    controlCell.style.cssText = 'text-align: center !important; vertical-align: middle;';
   }
-  inp.setAttribute("style", "background-color: black; color: white;border: none; text-align: center;");
-  inp.setAttribute("disabled", "");
-  inp.setAttribute("value", 0);
-  inp.setAttribute("size", 2);
-  inp.setAttribute("maxLength", 2);
-  cell2.appendChild(inp);
 
-  var button2 = document.createElement("input");
-  button2.setAttribute("type", "button");
-  button2.setAttribute("id", "plus_" + data.code);
-  button2.setAttribute("onclick", "counter(this.parentElement, 1)");
-  button2.setAttribute("value", "+");
-  cell2.appendChild(button2);
+  // Create centered container for buttons
+  const centerContainer = document.createElement("div");
+  centerContainer.style.cssText = 'display: flex; justify-content: center; align-items: center; width: 100%;';
+  
+  // Create button group
+  const buttonGroup = document.createElement("div");
+  buttonGroup.style.cssText = 'display: inline-flex; align-items: center; gap: 10px;';
 
-  if (data.hasOwnProperty('cycleTimer')) {
-    if (data.cycleTimer != "") {
-      inp = document.createElement('input');
-      inp.setAttribute("hidden", "");
-      inp.setAttribute("id", "cycleTimer_" + data.code);
-      inp.setAttribute("value", data.cycleTimer);
-      cell.appendChild(inp);
+  // Helper to create input elements
+  const createInput = (type, id, value, incrementValue) => {
+    const input = document.createElement("input");
+    input.type = type;
+    if (id) input.id = id;
+    if (value !== undefined) input.value = value;
+    if (incrementValue !== undefined) {
+      input.onclick = function() {
+        counter(this.parentElement.parentElement.parentElement, incrementValue);
+      };
     }
+	// Prevent double-tap zoom on buttons
+    if (type === "button") {
+      input.style.touchAction = 'manipulation';
+    }
+    return input;
+  };
+
+  // Build buttons from left to right
+  if (data.altInc1) {
+    buttonGroup.appendChild(createInput("button", `minusInc1_${data.code}`, -data.altInc1, -data.altInc1));
+  }
+  
+  if (data.altInc2) {
+    buttonGroup.appendChild(createInput("button", `minusInc2_${data.code}`, -data.altInc2, -data.altInc2));
+  }
+  
+  buttonGroup.appendChild(createInput("button", `minus_${data.code}`, "-", -1));
+
+  // Create main counter input
+  const counterInput = createInput("text", `input_${data.code}`, 0);
+  counterInput.classList.add("counter");
+  counterInput.name = (enableGoogleSheets && data.gsCol) ? data.gsCol : data.code;
+  counterInput.disabled = true;
+  counterInput.maxLength = 4;
+  counterInput.style.cssText = 'background-color: black; color: white; border: none; text-align: center; width: 3ch;';
+  buttonGroup.appendChild(counterInput);
+
+  buttonGroup.appendChild(createInput("button", `plus_${data.code}`, "+", 1));
+  
+  if (data.altInc2) {
+    buttonGroup.appendChild(createInput("button", `plusInc2_${data.code}`, `+${data.altInc2}`, data.altInc2));
+  }
+  
+  if (data.altInc1) {
+    buttonGroup.appendChild(createInput("button", `plusInc1_${data.code}`, `+${data.altInc1}`, data.altInc1));
+  }
+
+  // Nest: centerContainer -> buttonGroup
+  centerContainer.appendChild(buttonGroup);
+  controlCell.appendChild(centerContainer);
+
+  // Add hidden metadata fields directly to controlCell
+  if (data.cycleTimer) {
+    const timerInput = createInput("hidden", `cycleTimer_${data.code}`, data.cycleTimer);
+    controlCell.appendChild(timerInput);
   }
 
   if (data.hasOwnProperty('defaultValue')) {
-    var def = document.createElement("input");
-    def.setAttribute("id", "default_" + data.code)
-    def.setAttribute("type", "hidden");
-    def.setAttribute("value", data.defaultValue);
-    cell2.appendChild(def);
+    const defaultInput = createInput("hidden", `default_${data.code}`, data.defaultValue);
+    controlCell.appendChild(defaultInput);
   }
 
   return idx + 1;
@@ -331,8 +388,7 @@ function addClickableImage(table, idx, name, data) {
   inp.setAttribute("value", "none");
   if (data.hasOwnProperty('allowableResponses')) {
     let responses = data.allowableResponses.split(' ').map(Number)
-    console.log(responses)
-      inp.setAttribute("value", responses);
+    inp.setAttribute("value", responses);
   }
   cell.appendChild(inp);
 
@@ -402,12 +458,14 @@ function addClickableImage(table, idx, name, data) {
 function addText(table, idx, name, data) {
   var row = table.insertRow(idx);
   var cell1 = row.insertCell(0);
+  cell1.style.width = ColWidth;
   cell1.classList.add("title");
   if (!data.hasOwnProperty('code')) {
     cell1.innerHTML = `Error: No code specified for ${name}`;
     return idx + 1;
   }
   var cell2 = row.insertCell(1);
+  cell2.style.width = ColWidth;
   cell1.innerHTML = name + '&nbsp;';
   if (data.hasOwnProperty('tooltip')) {
     cell1.setAttribute("title", data.tooltip);
@@ -455,12 +513,14 @@ function addText(table, idx, name, data) {
 function addNumber(table, idx, name, data) {
   var row = table.insertRow(idx);
   var cell1 = row.insertCell(0);
+  cell1.style.width = ColWidth;
   cell1.classList.add("title");
   if (!data.hasOwnProperty('code')) {
     cell1.innerHTML = `Error: No code specified for ${name}`;
     return idx + 1;
   }
   var cell2 = row.insertCell(1);
+  cell2.style.width = ColWidth;
   cell1.innerHTML = name + '&nbsp;';
   if (data.hasOwnProperty('tooltip')) {
     cell1.setAttribute("title", data.tooltip);
@@ -518,12 +578,14 @@ function addNumber(table, idx, name, data) {
 function addRadio(table, idx, name, data) {
   var row = table.insertRow(idx);
   var cell1 = row.insertCell(0);
+  cell1.style.width = ColWidth;
   cell1.classList.add("title");
   if (!data.hasOwnProperty('code')) {
     cell1.innerHTML = `Error: No code specified for ${name}`;
     return idx + 1;
   }
   var cell2 = row.insertCell(1);
+  cell2.style.width = ColWidth;
   cell1.innerHTML = name + '&nbsp;';
   if (data.hasOwnProperty('tooltip')) {
     cell1.setAttribute("title", data.tooltip);
@@ -577,6 +639,7 @@ function addRadio(table, idx, name, data) {
 function addCheckbox(table, idx, name, data) {
   var row = table.insertRow(idx);
   var cell1 = row.insertCell(0);
+  cell1.style.width = ColWidth;
   cell1.classList.add("title");
   if (!data.hasOwnProperty('code')) {
     cell1.innerHTML = `Error: No code specified for ${name}`;
@@ -584,6 +647,7 @@ function addCheckbox(table, idx, name, data) {
   }
   var cell2 = row.insertCell(1);
   cell1.innerHTML = name + '&nbsp;';
+  cell2.style.width = ColWidth;
   if (data.hasOwnProperty('tooltip')) {
     cell1.setAttribute("title", data.tooltip);
   }
@@ -665,6 +729,12 @@ function addElement(table, idx, data) {
   return idx
 }
 
+function buildRequiredElementList(element) {
+	if (element.required == "true") {
+		requiredFields.push(element.code);
+	}
+}
+
 function configure() {
   try {
     var mydata = JSON.parse(config_data);
@@ -675,6 +745,7 @@ function configure() {
     var table = document.getElementById("prematch_table")
     var row = table.insertRow(0);
     var cell1 = row.insertCell(0);
+	cell1.style.width = ColWidth;
     cell1.innerHTML = `Error parsing configuration file: ${err.message}<br><br>Use a tool like <a href="http://jsonlint.com/">http://jsonlint.com/</a> to help you debug your config file`
     return -1
   }
@@ -725,6 +796,7 @@ function configure() {
   var idx = 0;
   pmc.forEach(element => {
     idx = addElement(pmt, idx, element);
+	buildRequiredElementList(element);
   });
 
   // Configure auton screen
@@ -786,16 +858,16 @@ function validateData() {
   var errStr = "";
   for (rf of requiredFields) {
     var thisRF = document.forms.scoutingForm[rf];
-    if (thisRF.value == "[]" || thisRF.value.length == 0) {
-      if (rf == "as") {
-        rftitle = "Auto Start Position"
-      } else {
-        thisInputEl = thisRF instanceof RadioNodeList ? thisRF[0] : thisRF;
-        rftitle = thisInputEl.parentElement.parentElement.children[0].innerHTML.replace("&nbsp;","");
-      }
-      errStr += rf + ": " + rftitle + "\n";
-      ret = false;
-    }
+	if (thisRF.value == "[]" || thisRF.value.length == 0) {
+	  if (rf == "as") {
+		rftitle = "Auto Start Position"
+	  } else {
+		thisInputEl = thisRF instanceof RadioNodeList ? thisRF[0] : thisRF;
+		rftitle = thisInputEl.parentElement.parentElement.children[0].innerHTML.replace("&nbsp;","");
+	  }
+	  errStr += rf + ": " + rftitle + "\n";
+	  ret = false;
+	}
   }
   if (ret == false) {
     alert("Enter all required values\n" + errStr);
@@ -1039,8 +1111,19 @@ function drawFields(name) {
     var shape = document.getElementById("shape_" + code);
     let shapeArr = shape.value.split(' ');
     var ctx = f.getContext("2d");
-    ctx.clearRect(0, 0, f.width, f.height);
-    ctx.drawImage(img, 0, 0, f.width, f.height);
+    var imgWidth = img.width;
+    var imgHeight = img.height;
+    let scale_factor = Math.min(ctx.canvas.width / img.width, ctx.canvas.height / img.height);
+    let newWidth = img.width * scale_factor;
+    let newHeight = img.height * scale_factor;
+    if (newWidth > 0) {
+      ctx.canvas.width = newWidth
+    }
+    if (newHeight > 0) {
+      ctx.canvas.height = newHeight
+    }
+    ctx.clearRect(0, 0, newWidth, newHeight);
+    ctx.drawImage(img, 0, 0, newWidth, newHeight);
 
     var xyStr = document.getElementById("XY_" + code).value
     if (JSON.stringify(xyStr).length > 2) {
@@ -1404,3 +1487,24 @@ window.onload = function () {
     }
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
