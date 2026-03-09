@@ -66,96 +66,98 @@ var config_data = `
     }
   ],
   "auton": [
-    { "name": "Auto Shooting Location",
-      "code": "asl",
-      "type": "clickable_image",
-      "filename": "2026/half_field.png",
-      "dimensions": "7 10",
-      "allowableResponses": "1 2 3 4 8 9 10 11 15 16 17 18 22 23 24 25 29 30 31 32 36 37 38 39 43 44 45 46 50 51 52 53 57 58 59 60 64 65 66 67",
-      "expectedMax": 5,
-      "shape": "circle 5 black red true"
+    { "name": "Time Entered Neutral Zone (sec)",
+      "code": "tnz",
+      "type": "number",
+      "min": 0,
+      "max": 15
     },
-    { "name": "Fuel Scored",
-      "code": "afs",
-      "expectedMax": 32,
-      "altInc1": 10,
-      "altInc2": 5,
-      "type": "counter"
-    },
-    { "name": "Pass from Neutral Zone",
-      "code": "apn",
-      "expectedMax": 60,
-      "altInc1": 10,
-      "altInc2": 5,
-      "type": "counter"
-    },
-    { "name": "Climb (L1)",
-      "code": "ac",
-      "type": "radio",
-      "choices": {
-        "c": "Climbed<br>",
-        "a": "Attempted<br>",
-        "x": "Not Attempted"
-      },
-      "defaultValue": "x"
-    },
-    { "name": "Pickup from Depot",
-      "code": "afd",
+
+    { "name": "Crossed via Trench?",
+      "code": "t",
       "type": "bool"
     },
-    { "name": "Pickup from Outpost",
-      "code": "afo",
+    { "name": "Crossed via Bump?",
+      "code": "b",
       "type": "bool"
     },
-    { "name": "Pickup from Neutral Zone",
-      "code": "aff",
+
+    { "name": "Pickup from Depot?",
+      "code": "d",
+      "type": "bool"
+    },
+    { "name": "Pickup from Outpost?",
+      "code": "o",
+      "type": "bool"
+    },
+    { "name": "Pickup from Neutral Zone?",
+      "code": "nz",
+      "type": "bool"
+    },
+
+    { "name": "Scored in Hub?",
+      "code": "ash",
+      "type": "bool"
+    },
+
+    { "name": "Auto WON?",
+      "code": "awn",
       "type": "bool"
     }
   ],
   "teleop": [
-    { "name": "Shooting Locations",
-      "code": "tsl",
-      "type": "clickable_image",
-      "filename": "2026/half_field.png",
-      "dimensions": "7 10",
-      "allowableResponses": "1 2 3 4 8 9 10 11 15 16 17 18 22 23 24 25 29 30 31 32 36 37 38 39 43 44 45 46 50 51 52 53 57 58 59 60 64 65 66 67",
-      "expectedMax": 25,
-      "shape": "circle 5 black red true"
+    { "name": "Pickup from Depot?",
+      "code": "td",
+      "type": "bool"
     },
-    { "name": "Fuel Scored",
-      "code": "tfs",
-      "expectedMax": 150,
-      "altInc1": 10,
-      "altInc2": 5,
-      "type": "counter"
+    { "name": "Pickup from Outpost?",
+      "code": "to",
+      "type": "bool"
     },
-    { "name": "Pass from Neutral Zone",
+    { "name": "Pickup from Floor?",
+      "code": "tf",
+      "type": "bool"
+    },
+
+    { "name": "Active Period 1 Fuel per Cycle",
+      "code": "ap1",
+      "type": "radio",
+      "choices": {
+        "5": "0-10<br>",
+        "30": "10-30<br>",
+        "40": "30-50<br>",
+        "60": "50+"
+      }
+    },
+    { "name": "Active Period 2 Fuel per Cycle",
+      "code": "ap2",
+      "type": "radio",
+      "choices": {
+        "5": "0-10<br>",
+        "30": "10-30<br>",
+        "40": "30-50<br>",
+        "60": "50+"
+      }
+    },
+
+    { "name": "Pass from Neutral Zone?",
       "code": "pnz",
-      "expectedMax": 250,
-      "altInc1": 10,
-      "altInc2": 5,
-      "type": "counter"
+      "type": "bool"
     },
-    { "name": "Pass from Opp Alliance Zone",
+    { "name": "Pass from Opp Alliance Zone?",
       "code": "poa",
-      "expectedMax": 250,
-      "altInc1": 10,
-      "altInc2": 5,
-      "type": "counter"
-    },
-    { "name": "Pickup from Depot",
-      "code": "tfd",
       "type": "bool"
     },
-    { "name": "Pickup from Outpost",
-      "code": "tfo",
+
+    { "name": "Crossed via Trench?",
+      "code": "tt",
       "type": "bool"
     },
-    { "name": "Pickup from Floor",
-      "code": "tff",
+    { "name": "Crossed via Bump?",
+      "code": "tb",
       "type": "bool"
     }
-  ],
+  ], 
   "endgame": [
     { "name": "Climb",
       "code": "tc",
@@ -206,25 +208,12 @@ var config_data = `
       },
       "defaultValue":"3"
     },
-    { "name": "Crossed Bump",
-      "code": "bmp",
-      "type": "bool"
-    },
-    { "name": "Crossed Trench",
-      "code": "tre",
-      "type": "bool"
-    },
     { "name": "Died/Immobilized",
       "code": "die",
       "type": "bool"
     },
     { "name": "Tippy<br>(almost tipped over)",
       "code": "tip",
-      "type": "bool"
-    },
-    { "name": "Make good<br>alliance partner?",
-      "tooltip": "Would you want this robot on your alliance in eliminations?",
-      "code": "all",
       "type": "bool"
     },
     { "name": "Was Defended",
@@ -235,18 +224,18 @@ var config_data = `
       "code": "pen",
       "type": "bool"
     },
-    { "name": "Fuel Percentage",
+    { "name": "Total Fuel of Alliance",
       "tooltip": "What percentage of the total fuel for this alliance did this robot score?",
       "code": "pct",
       "type": "number",
       "min": 0,
-      "max": 100
+      "max": 1000
     },
     { "name": "Comments",
       "code": "co",
       "type": "text",
-      "size": 15,
-      "maxSize": 55
+      "size": 40,
+      "maxSize": 500
     }
   ]
 }`;
