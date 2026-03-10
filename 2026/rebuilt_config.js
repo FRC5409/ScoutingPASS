@@ -205,14 +205,16 @@ var config_data = `
       "choices": {
         "1": "1 (slow)<br>",
         "2": "2<br>",
-        "3": "3<br>",
-        "4": "4<br>",
-        "5": "5 (fast)"
+        "3": "3 (fast)"
       },
       "defaultValue":"3"
     },
-    { "name": "Died/Immobilized",
+    { "name": "Died",
       "code": "die",
+      "type": "bool"
+    },
+    { "name": "Beached<br>(couldn't get off on their own)",
+      "code": "bea",
       "type": "bool"
     },
     { "name": "Tippy<br>(almost tipped over)",
@@ -223,7 +225,7 @@ var config_data = `
       "code": "def",
       "type": "bool"
     },
-    { "name": "Excessive Penalties",
+    { "name": "Excessive Penalties (>25)",
       "code": "pen",
       "type": "bool"
     },
