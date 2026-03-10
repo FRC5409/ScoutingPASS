@@ -99,7 +99,10 @@ var config_data = `
       "code": "ash",
       "type": "bool"
     },
-
+    { "name": "Climbed?",
+      "code": "ac",
+      "type": "bool"
+    },
     { "name": "Auto WON?",
       "code": "awn",
       "type": "bool"
