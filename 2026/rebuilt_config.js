@@ -15,7 +15,7 @@ var config_data = `
     { "name": "Event",
       "code": "e",
       "type": "event",
-      "defaultValue": "2026ilch",
+      "defaultValue": "2026onosh",
       "required": "true"
     },
     { "name": "Match Level",
@@ -74,7 +74,7 @@ var config_data = `
     },
 
     { "name": "Crossed via Trench?",
-      "code": "t",
+      "code": "tr",
       "type": "bool"
     },
     { "name": "Crossed via Bump?",
