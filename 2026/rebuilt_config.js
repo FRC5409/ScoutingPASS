@@ -15,7 +15,7 @@ var config_data = `
     { "name": "Event",
       "code": "e",
       "type": "event",
-      "defaultValue": "2026onosh",
+      "defaultValue": "2026onwat",
       "required": "true"
     },
     { "name": "Match Level",
@@ -77,8 +77,14 @@ var config_data = `
       "code": "tr",
       "type": "bool"
     },
+
     { "name": "Crossed via Bump?",
       "code": "b",
+      "type": "bool"
+    },
+
+    { "name": "Crossed Midline of Neutral Zone?",
+      "code": "mid",
       "type": "bool"
     },
 
@@ -86,23 +92,26 @@ var config_data = `
       "code": "d",
       "type": "bool"
     },
+
     { "name": "Pickup from Outpost?",
       "code": "o",
       "type": "bool"
     },
+
     { "name": "Pickup from Neutral Zone?",
       "code": "nz",
       "type": "bool"
     },
-
     { "name": "Scored in Hub?",
       "code": "ash",
       "type": "bool"
     },
+
     { "name": "Climbed?",
       "code": "ac",
       "type": "bool"
     },
+
     { "name": "Auto WON?",
       "code": "awn",
       "type": "bool"
@@ -126,7 +135,8 @@ var config_data = `
       "code": "ap1",
       "type": "radio",
       "choices": {
-        "5": "0-10<br>",
+        "0": "0<br>",
+        "5": "1-10<br>",
         "30": "10-30<br>",
         "40": "30-50<br>",
         "60": "50+"
@@ -136,6 +146,7 @@ var config_data = `
       "code": "ap2",
       "type": "radio",
       "choices": {
+        "0": "0<br>",
         "5": "0-10<br>",
         "30": "10-30<br>",
         "40": "30-50<br>",
