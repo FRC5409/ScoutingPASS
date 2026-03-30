@@ -59,7 +59,7 @@ var config_data = `
       "max": 99999
     },
     { "name": "Auto Start Location",
-      "tooltip": "Starting position at the beginning of the match. Robots must start with their bumpers overlapping the starting line in front of the bump/trench. Flip the image if you are scouting the Blue Alliance.",
+      "tooltip": "Starting position at the beginning of the match. Robots must start with their bumpers overlapping the starting line in front of the bump/trench. The image is set for the left side alliance, flip it if you are scouting a team on the right side alliance.",
       "code": "as",
       "type": "clickable_image",
       "filename": "2026/half_field.png",
