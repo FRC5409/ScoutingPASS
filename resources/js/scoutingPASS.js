@@ -1480,7 +1480,7 @@ function attachInfoTooltip(el, tooltipText) {
   const info = document.createElement("span");
   info.innerText = "ⓘ";
   info.style.cursor = "pointer";
-  info.style.color = "#007bff"; // blueish for visibility
+  info.style.color = "#007bffff";
   info.style.marginLeft = "4px";
   info.style.fontWeight = "bold";
   el.appendChild(info);
@@ -1508,19 +1508,19 @@ function attachInfoTooltip(el, tooltipText) {
     popup.style.top = `${rect.bottom + window.scrollY + 8}px`;
     popup.style.transform = "translateX(-50%)";
     popup.style.display = "block";
-    info.style.color = "#aacaedff";
+    info.style.color = "#eb9baaff";
   }
 
   function hideTooltip() {
     popup.style.display = "none";
-    info.style.color = "#007bff";
+    info.style.color = "#007bffff";
   }
 
   // // Desktop hover
   // info.addEventListener("mouseenter", showTooltip);
   // info.addEventListener("mouseleave", hideTooltip);
 
-  // Show if clicking on the icon
+  // Show/hide if clicking on the icon
   info.addEventListener("click", (e) => {
     e.stopPropagation();
     if (popup.style.display === "block") {
