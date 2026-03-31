@@ -37,7 +37,8 @@ function addTimer(table, idx, name, data) {
   }
   cell1.innerHTML = name;
   if (data.hasOwnProperty('tooltip')) {
-    cell1.setAttribute("title", data.tooltip);
+    cell1.innerHTML = name + '&nbsp;';
+    attachInfoTooltip(cell1, data.tooltip);
   }
 
   idx += 1
@@ -164,7 +165,8 @@ function addCounter(table, idx, name, data) {
   const titleCell = row.insertCell(0);
   titleCell.classList.add("title");
   if (data.hasOwnProperty('tooltip')) {
-    titleCell.setAttribute("title", data.tooltip);
+    titleCell.innerHTML = name + '&nbsp;';
+    attachInfoTooltip(titleCell, data.tooltip);
   }
 
   let controlCell;
@@ -283,7 +285,8 @@ function addClickableImage(table, idx, name, data) {
   }
   cell.innerHTML = name;
   if (data.hasOwnProperty('tooltip')) {
-    cell.setAttribute("title", data.tooltip);
+    cell.innerHTML = name + '&nbsp;';
+    attachInfoTooltip(cell, data.tooltip);
   }
 
   let showFlip = true;
@@ -468,7 +471,8 @@ function addText(table, idx, name, data) {
   cell2.style.width = ColWidth;
   cell1.innerHTML = name + '&nbsp;';
   if (data.hasOwnProperty('tooltip')) {
-    cell1.setAttribute("title", data.tooltip);
+    cell1.innerHTML = name + '&nbsp;';
+    attachInfoTooltip(cell1, data.tooltip);
   }
   cell2.classList.add("field");
   var inp = document.createElement("input");
@@ -523,7 +527,8 @@ function addNumber(table, idx, name, data) {
   cell2.style.width = ColWidth;
   cell1.innerHTML = name + '&nbsp;';
   if (data.hasOwnProperty('tooltip')) {
-    cell1.setAttribute("title", data.tooltip);
+    cell1.innerHTML = name + '&nbsp;';
+    attachInfoTooltip(cell1, data.tooltip);
   }
   cell2.classList.add("field");
   var inp = document.createElement("input");
@@ -588,7 +593,8 @@ function addRadio(table, idx, name, data) {
   cell2.style.width = ColWidth;
   cell1.innerHTML = name + '&nbsp;';
   if (data.hasOwnProperty('tooltip')) {
-    cell1.setAttribute("title", data.tooltip);
+    cell1.innerHTML = name + '&nbsp;';
+    attachInfoTooltip(cell1, data.tooltip);
   }
   cell2.classList.add("field");
   if ((data.type == 'level') ||
@@ -649,7 +655,8 @@ function addCheckbox(table, idx, name, data) {
   cell1.innerHTML = name + '&nbsp;';
   cell2.style.width = ColWidth;
   if (data.hasOwnProperty('tooltip')) {
-    cell1.setAttribute("title", data.tooltip);
+    cell1.innerHTML = name + '&nbsp;';
+    attachInfoTooltip(cell1, data.tooltip);
   }
   cell2.classList.add("field");
   var inp = document.createElement("input");
@@ -1466,6 +1473,67 @@ function displayData(){
 function copyData(){
   navigator.clipboard.writeText(getData(dataFormat));
   document.getElementById('copyButton').setAttribute('value','Copied');
+}
+
+function attachInfoTooltip(el, tooltipText) {
+  // Create the ⓘ icon
+  const info = document.createElement("span");
+  info.innerText = "ⓘ";
+  info.style.cursor = "pointer";
+  info.style.color = "#007bffff";
+  info.style.marginLeft = "4px";
+  info.style.fontWeight = "bold";
+  el.appendChild(info);
+
+  // Create the tooltip element
+  const popup = document.createElement("div");
+  popup.innerText = tooltipText;
+  popup.style.position = "absolute";
+  popup.style.background = "#333";
+  popup.style.color = "#fff";
+  popup.style.padding = "8px 12px";
+  popup.style.borderRadius = "6px";
+  popup.style.fontSize = "0.9em";
+  popup.style.maxWidth = "250px";
+  popup.style.boxShadow = "0 2px 8px rgba(0,0,0,0.3)";
+  popup.style.display = "none"; // hidden initially
+  popup.style.zIndex = 10000;
+  popup.style.overflowWrap = "break-word";
+
+  document.body.appendChild(popup);
+
+  function showTooltip(e) {
+    const rect = info.getBoundingClientRect();
+    popup.style.left = `${rect.left + rect.width / 2}px`;
+    popup.style.top = `${rect.bottom + window.scrollY + 8}px`;
+    popup.style.transform = "translateX(-50%)";
+    popup.style.display = "block";
+    info.style.color = "#eb9baaff";
+  }
+
+  function hideTooltip() {
+    popup.style.display = "none";
+    info.style.color = "#007bffff";
+  }
+
+  // // Desktop hover
+  // info.addEventListener("mouseenter", showTooltip);
+  // info.addEventListener("mouseleave", hideTooltip);
+
+  // Show/hide if clicking on the icon
+  info.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (popup.style.display === "block") {
+      hideTooltip()
+    } else {
+      showTooltip();
+    }
+  });
+
+  // Hide if clicking anywhere else on the page
+  document.addEventListener("click", () => {
+    hideTooltip();
+  });
 }
 
 window.onload = function () {
