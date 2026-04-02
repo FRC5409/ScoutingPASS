@@ -125,9 +125,9 @@ We realize that you may not want to lug your computer around the pits to scan ea
 
 We have 6 scouts per match.  One for each robot.  Each scout has this website pre-loaded on their phone or a team tablet.
 
-The lead scout has a laptop with Excel and a wired handheld scanner in the stands with the scouts.  ([Nadomoo Bur3072 - ~$55](https://www.amazon.com/NADAMOO-Wireless-Barcode-Cordless-Computer/dp/B06Y2RMM51?th=1))
+The lead scout has a laptop with Excel and a scanner app in the stands with the scouts.  ([Nadomoo Bur3072 - ~$55](https://www.amazon.com/NADAMOO-Wireless-Barcode-Cordless-Computer/dp/B06Y2RMM51?th=1))
 
-At the end of each match, the lead scout kicks off an Excel macro that pops up an input box. (See an example Excel spreadsheet in the Excel directory)  The scouts show their QR code to the lead scout, one by one, who scans the QR code.  The data from the QR code is parsed, and a row is added to the Scouting Data Table in Excel.   If the table doesn't exist, it will create it.
+At the end of each match, the lead scout kicks off an Excel macro that pops up an input box. (See an example Excel spreadsheet in the Excel directory)  The scouts send their QR codes to the lead scout, who compiles them in a folder. The data from the QR code is parsed using the scanner app, and a row is added to the Scouting Data Table in Excel.   If the table doesn't exist, it will create it.
 
 We use custom Excel screens and graphs to determine a strategy for each of our matches.
 
@@ -167,6 +167,11 @@ JSON is a stickler for commas and brackets.  If you see JSON errors, check your 
 <details><summary>What does P.A.S.S. stand for?</summary>
 <br />
 PWNAGE Analytical Strategy System
+</details>
+
+<details><summary>How do I test a change to the website without affecting the main deployment?</summary>
+<br />
+Download the "Live Server" extension in Visual Studio Code. This will allow you to right-click the index.html file and Open With Live Server. This is a private host that only you can view, and it will continuously update any changes you make without affecting the main site.
 </details>
 
 <details><summary>How does the Field Image element work?</summary>
