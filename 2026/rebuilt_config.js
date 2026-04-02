@@ -236,13 +236,14 @@ var config_data = `
       "defaultValue": "x"
     },
     { "name": "Speed Rating",
-      "tooltip": "How fast was the robot on average?",
+      "tooltip": "How fast was the robot on average? Select "Did Not Move" if the robot didn't move at all during the match, or if it didn't play.",
       "code": "sr",
       "type": "radio",
       "choices": {
         "1": "1 (slow)<br>",
         "2": "2<br>",
-        "3": "3 (fast)"
+        "3": "3 (fast)<br>",
+        "x": "Did Not Move"
       },
       "defaultValue":"3"
     },
