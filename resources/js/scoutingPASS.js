@@ -976,6 +976,10 @@ function qr_clear() {
   qr.clear()
 }
 
+/*
+ID of a code e.x. match level (m): input_m_qm, input_m_sf, input_m_f
+
+*/
 function clearForm() {
   var match = 0;
   var e = 0;
@@ -1007,33 +1011,40 @@ function clearForm() {
   inputs = document.querySelectorAll("[id*='input_']");
   for (e of inputs) {
     code = e.id.substring(6)
+    var base = code.split("_")[0];
 
-    // Don't clear key fields
-    if (code == "m") continue
-    if (code.substring(0, 2) == "r_") continue
-    if (code.substring(0, 2) == "l_") continue
-    if (code == "e") continue
-    if (code == "s") continue
+    // Skip clearing key fields
+    if (code == "s") continue // keep scouter initials
+    if (code == "e") continue // keep event name
+    if (code.startsWith("l_")) continue; // keep match level
+    if (code.startsWith("r_")) continue; // keep robot
+    if (code == "m") document.getElementById("default_" + code).value++;
 
     if (e.className == "clickableImage") {
       e.value = "[]";
       continue;
     }
 
-    radio = code.indexOf("_")
-    if (radio > -1) {
-      var baseCode = code.substr(0, radio)
-      if (e.checked) {
-        e.checked = false
-        document.getElementById("display_" + baseCode).value = ""
-      }
-      var defaultValue = document.getElementById("default_" + baseCode).value
-      if (defaultValue != "") {
-        if (defaultValue == e.value) {
-          e.checked = true
-          document.getElementById("display_" + baseCode).value = defaultValue
+    if (e.type == "radio") {
+      e.checked = false;
+
+      // Extract base code (e.g. "l" from "l_qm") or keeps the same if no underscore
+      var baseCode = code.includes('_') ? code.split('_')[0] : code;
+
+      // Gets the default value and the displayed value for the field, using the baseCode
+      var defaultEl = document.getElementById("default_" + baseCode);
+      var displayEl = document.getElementById("display_" + baseCode);
+
+      if (defaultEl && defaultEl.value !== "") {
+        if (e.value == defaultEl.value) {
+          e.checked = true;
+          if (displayEl) displayEl.value = defaultEl.value;
         }
+      } else {
+        // If no default exists, make sure the display is wiped
+        if (displayEl) displayEl.value = "";
       }
+
     } else {
       if (e.type == "number" || e.type == "text" || e.type == "hidden") {
         if ((e.className == "counter") ||
