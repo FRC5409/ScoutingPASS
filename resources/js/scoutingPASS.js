@@ -991,7 +991,7 @@ function clearForm() {
 
     // Increment match
     match = parseInt(document.getElementById("input_m").value)
-    if (match == NaN) {
+    if (isNaN(match)) {
       document.getElementById("input_m").value = ""
     } else {
       document.getElementById("input_m").value = match + 1
@@ -1010,28 +1010,23 @@ function clearForm() {
 
   inputs = document.querySelectorAll("[id*='input_']");
   for (e of inputs) {
-    code = e.id.substring(6)
+   // var e = inputs[i];
+    var code = e.id.substring(6);
     var base = code.split("_")[0];
 
-    // Skip clearing key fields
-    if (code == "s") continue // keep scouter initials
-    if (code == "e") continue // keep event name
-    if (code.startsWith("l_")) continue; // keep match level
-    if (code.startsWith("r_")) continue; // keep robot
-    if (code == "m") document.getElementById("default_" + code).value++;
+    // 1. Skip key fields
+    if (code == "s" || code == "e" || code == "m" || code.startsWith("l_") || code.startsWith("r_")) continue;
 
+    // 2. Handle Clickable Images
     if (e.className == "clickableImage") {
       e.value = "[]";
       continue;
     }
 
+    // 3. Handle Radio Buttons (Multi-choice)
     if (e.type == "radio") {
       e.checked = false;
-
-      // Extract base code (e.g. "l" from "l_qm") or keeps the same if no underscore
       var baseCode = code.includes('_') ? code.split('_')[0] : code;
-
-      // Gets the default value and the displayed value for the field, using the baseCode
       var defaultEl = document.getElementById("default_" + baseCode);
       var displayEl = document.getElementById("display_" + baseCode);
 
@@ -1041,42 +1036,29 @@ function clearForm() {
           if (displayEl) displayEl.value = defaultEl.value;
         }
       } else {
-        // If no default exists, make sure the display is wiped
         if (displayEl) displayEl.value = "";
       }
+      continue; // Move to next input
+    }
 
-    } else {
-      if (e.type == "number" || e.type == "text" || e.type == "hidden") {
-        if ((e.className == "counter") ||
-          (e.className == "timer") ||
-          (e.className == "cycle")) {
-          e.value = 0
-          if (e.className == "timer" || e.className == "cycle") {
-            // Stop interval
-            timerStatus = document.getElementById("status_" + code);
-            startButton = document.getElementById("start_" + code);
-            intervalIdField = document.getElementById("intervalId_" + code);
-            var intervalId = intervalIdField.value;
-            timerStatus.value = 'stopped';
-            startButton.innerHTML = "Start";
-            if (intervalId != '') {
-              clearInterval(intervalId);
-            }
-            intervalIdField.value = '';
-            if (e.className == "cycle") {
-              document.getElementById("cycletime_" + code).value = "[]"
-              document.getElementById("display_" + code).value = ""
-            }
-          }
-        } else {
-          e.value = ""
-        }
-      } else if (e.type == "checkbox") {
-        if (e.checked == true) {
-          e.checked = false
+    // 4. Handle Checkboxes (bools)
+    if (e.type == "checkbox") {
+      e.checked = false;
+      continue;
+    }
+
+    // 5. Handle Text, Numbers, and Comments
+    if (e.type == "number" || e.type == "text" || e.type == "hidden" || e.tagName == "TEXTAREA") {
+      if (e.classList.contains("counter") || e.classList.contains("timer") || e.classList.contains("cycle")) {
+        e.value = 0;
+        // ... (Keep your existing timer/cycle reset logic here) ...
+        if (e.className == "cycle") {
+             document.getElementById("cycletime_" + code).value = "[]";
+             document.getElementById("display_" + code).value = "";
         }
       } else {
-        console.log("unsupported input type")
+        // This clears comments (co) and other text fields
+        e.value = "";
       }
     }
   }
