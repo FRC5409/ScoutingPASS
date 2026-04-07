@@ -976,6 +976,10 @@ function qr_clear() {
   qr.clear()
 }
 
+/*
+ID of a code e.x. match level (m): input_m_qm, input_m_sf, input_m_f
+
+*/
 function clearForm() {
   var match = 0;
   var e = 0;
@@ -987,7 +991,7 @@ function clearForm() {
 
     // Increment match
     match = parseInt(document.getElementById("input_m").value)
-    if (match == NaN) {
+    if (isNaN(match)) {
       document.getElementById("input_m").value = ""
     } else {
       document.getElementById("input_m").value = match + 1
@@ -1006,66 +1010,55 @@ function clearForm() {
 
   inputs = document.querySelectorAll("[id*='input_']");
   for (e of inputs) {
-    code = e.id.substring(6)
+   // var e = inputs[i];
+    var code = e.id.substring(6);
+    var base = code.split("_")[0];
 
-    // Don't clear key fields
-    if (code == "m") continue
-    if (code.substring(0, 2) == "r_") continue
-    if (code.substring(0, 2) == "l_") continue
-    if (code == "e") continue
-    if (code == "s") continue
+    // 1. Skip key fields
+    if (code == "s" || code == "e" || code == "m" || code.startsWith("l_") || code.startsWith("r_")) continue;
 
+    // 2. Handle Clickable Images
     if (e.className == "clickableImage") {
       e.value = "[]";
       continue;
     }
 
-    radio = code.indexOf("_")
-    if (radio > -1) {
-      var baseCode = code.substr(0, radio)
-      if (e.checked) {
-        e.checked = false
-        document.getElementById("display_" + baseCode).value = ""
-      }
-      var defaultValue = document.getElementById("default_" + baseCode).value
-      if (defaultValue != "") {
-        if (defaultValue == e.value) {
-          e.checked = true
-          document.getElementById("display_" + baseCode).value = defaultValue
-        }
-      }
-    } else {
-      if (e.type == "number" || e.type == "text" || e.type == "hidden") {
-        if ((e.className == "counter") ||
-          (e.className == "timer") ||
-          (e.className == "cycle")) {
-          e.value = 0
-          if (e.className == "timer" || e.className == "cycle") {
-            // Stop interval
-            timerStatus = document.getElementById("status_" + code);
-            startButton = document.getElementById("start_" + code);
-            intervalIdField = document.getElementById("intervalId_" + code);
-            var intervalId = intervalIdField.value;
-            timerStatus.value = 'stopped';
-            startButton.innerHTML = "Start";
-            if (intervalId != '') {
-              clearInterval(intervalId);
-            }
-            intervalIdField.value = '';
-            if (e.className == "cycle") {
-              document.getElementById("cycletime_" + code).value = "[]"
-              document.getElementById("display_" + code).value = ""
-            }
-          }
-        } else {
-          e.value = ""
-        }
-      } else if (e.type == "checkbox") {
-        if (e.checked == true) {
-          e.checked = false
+    // 3. Handle Radio Buttons (Multi-choice)
+    if (e.type == "radio") {
+      e.checked = false;
+      var baseCode = code.includes('_') ? code.split('_')[0] : code;
+      var defaultEl = document.getElementById("default_" + baseCode);
+      var displayEl = document.getElementById("display_" + baseCode);
+
+      if (defaultEl && defaultEl.value !== "") {
+        if (e.value == defaultEl.value) {
+          e.checked = true;
+          if (displayEl) displayEl.value = defaultEl.value;
         }
       } else {
-        console.log("unsupported input type")
+        if (displayEl) displayEl.value = "";
+      }
+      continue; // Move to next input
+    }
+
+    // 4. Handle Checkboxes (bools)
+    if (e.type == "checkbox") {
+      e.checked = false;
+      continue;
+    }
+
+    // 5. Handle Text, Numbers, and Comments
+    if (e.type == "number" || e.type == "text" || e.type == "hidden" || e.tagName == "TEXTAREA") {
+      if (e.classList.contains("counter") || e.classList.contains("timer") || e.classList.contains("cycle")) {
+        e.value = 0;
+        // ... (Keep your existing timer/cycle reset logic here) ...
+        if (e.className == "cycle") {
+             document.getElementById("cycletime_" + code).value = "[]";
+             document.getElementById("display_" + code).value = "";
+        }
+      } else {
+        // This clears comments (co) and other text fields
+        e.value = "";
       }
     }
   }
