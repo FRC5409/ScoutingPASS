@@ -5,65 +5,41 @@ var config_data = `
   "page_title": "REBUILT",
   "pitConfig": "true",
   "prematch": [
-    { "name": "Team Number",
+    { "name": "Team #",
       "code": "t",
-      "type": "number"
-    },
-    { "name": "Width",
-      "code": "wid",
       "type": "number",
-      "defaultValue": "0"
+      "required": "true"
     },
-    { "name": "Weight",
-      "code": "wei",
+    { "name": "Hopper Fuel Capacity",
+      "code": "cap",
       "type": "number",
-      "defaultValue": "0"
+      "min": 0,
+      "required": "true"
     },
-    { "name": "Drivetrain",
-      "code": "drv",
+    { "name": "Fuel Per Second",
+      "code": "bps",
+      "type": "number",
+      "min": 0,
+      "required": "true"
+    },
+    { "name": "Pass?",
+      "code": "p",
       "type": "radio",
       "choices": {
-        "s": "Swerve<br>",
-        "w": "West Coast/Tank<br>",
-        "b": "Butterfly/Grashopper<br>",
-        "m": "Mechanum<br>",
-        "o": "Other"
+        "nz": "Neutral Zone<br>",
+        "oz": "Opp Alliance zone<br>",
+        "both": "Both<br>",
+        "x": "Doesn't pass"
       },
-      "defaultValue": "o"
+      "defaultValue": "x"
     },
-    { "name": "Other Drivetrain",
-      "code": "odt",
-      "type": "text",
-      "size": 20,
-      "maxSize": 50
+    { "name": "Bump?",
+      "code": "b",
+      "type": "bool"
     },
-    { "name": "Swerve Ratio",
-      "code": "sr",
-      "type": "radio",
-      "choices": {
-        "1": "L1 (8.14:1)<br>",
-        "2": "L2 (6.75:1)<br>",
-        "3": "L3 (6.12:1)<br>",
-        "4": "L4 (5.14:1)<br>",
-        "o": "Other ratio (put in comments)<br>",
-        "x": "Not Swerve"
-      },
-      "defaultValue":"x"
-    },
-    { "name": "Drivetrain Motor",
-      "code": "mot",
-      "type": "radio",
-      "choices": {
-        "n": "Neo<br>",
-        "f": "Falcon<br>",
-        "c": "CIM<br>",
-        "x": "Other<br>"
-      },
-      "defaultValue":"x"
-    },
-    { "name": "# of Batteries",
-      "code": "nob",
-      "type": "number"
+    { "name": "Trench?",
+      "code": "tr",
+      "type": "bool"
     },
     { "name": "Floor pickup Fuel",
       "code": "fpu",
@@ -77,23 +53,59 @@ var config_data = `
       "code": "opu",
       "type": "bool"
     },
-    { "name": "Autos",
-      "code": "aut",
-      "type": "text",
-      "size": 20,
-      "maxSize": 250
+    { "name": "Driver Skill (1-10)",
+      "code": "ds",
+      "type": "radio",
+      "choices": {
+        "1": "1<br>",
+        "2": "2<br>",
+        "3": "3<br>",
+        "4": "4<br>",
+        "5": "5<br>",
+        "6": "6<br>",
+        "7": "7<br>",
+        "8": "8<br>",
+        "9": "9<br>",
+        "10": "10<br>"
+      },
+      "required": "true"
     },
-    { "name": "Scouting Method /<br>Program (ScoutingPASS?)",
-      "code": "sct",
-      "type": "text",
-      "size": 20,
-      "maxSize": 250
+    { "name": "Pit Neatness before match",
+      "code": "pb",
+      "type": "radio",
+      "choices": {
+        "1": "1<br>",
+        "2": "2<br>",
+        "3": "3<br>",
+        "4": "4<br>",
+        "5": "5<br>"
+      },
+      "required": "true"
+    },
+    { "name": "Pit Neatness after match",
+      "code": "pa",
+      "type": "radio",
+      "choices": {
+        "1": "1<br>",
+        "2": "2<br>",
+        "3": "3<br>",
+        "4": "4<br>",
+        "5": "5<br>"
+      },
+      "required": "true"
+    },
+    { "name": "Auto Start Locations",
+      "code": "as",
+      "type": "clickable_image",
+      "filename": "2026/half_field.png",
+      "dimensions": "7 10",
+      "allowableResponses": "4 11 18 25 32 39 46 53 60 67",
+      "shape": "circle 5 black red true"
     },
     { "name": "Comments",
       "code": "co",
       "type": "text",
-      "size": 20,
-      "maxSize": 250
+      "size": 20
     }
   ],
   "auton": [
